@@ -1,0 +1,53 @@
+---
+title: "gganimate"
+author: "SanjayHamal"
+date: "3/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(gganimate)
+library(tidyverse)
+```
+
+
+```{r}
+library(glue)
+
+
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+
+  geom_point(aes(color=Species))+
+  transition_states(states = Species, transition_length = 1, state_length = 1)+ 
+  ease_aes()+
+  ggtitle(label = 'Species: {closest_state}')
+```
+```{r}
+for(i in seq(nrow(iris))){
+  iris[i,"Year"] = 1899+i
+  
+  
+}
+
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+
+  geom_point(aes(color=Species))+
+  transition_time(time = Year)+
+  ggtitle()
+
+iris
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+
+  geom_col(aes(fill= Species))+
+  transition_time(time = Year,  range = c(1900,2000))+
+  labs(title = "Year: {frame_time}")
+  
+
+ggplot(iris, aes(Sepal.Length, Sepal.Width))+
+  geom_line(aes(color=Species))+
+  transition_reveal(Year)
+```
+
+
+
